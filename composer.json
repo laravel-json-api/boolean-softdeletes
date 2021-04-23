@@ -23,19 +23,24 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0"
+        "php": "^7.4|^8.0",
+        "laravel-json-api/eloquent": "^1.0.0-beta.2",
+        "tenantcloud/laravel-boolean-softdeletes": "^3.0"
     },
     "require-dev": {
+        "orchestra/testbench": "^6.17",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
-            "LaravelJsonApi\\BooleanSoftDeletes\\": "src/"
+            "LaravelJsonApi\\BooleanSoftDeletes\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "LaravelJsonApi\\BooleanSoftDeletes\\Tests\\": "tests/"
+            "App\\": "tests/app",
+            "Database\\Factories\\": "tests/database/factories",
+            "LaravelJsonApi\\BooleanSoftDeletes\\Tests\\": "tests/lib"
         }
     },
     "extra": {
@@ -43,7 +48,7 @@
             "dev-develop": "1.x-dev"
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "beta",
     "prefer-stable": true,
     "config": {
         "sort-packages": true
