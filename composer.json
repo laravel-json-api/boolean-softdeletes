@@ -1,0 +1,51 @@
+{
+    "name": "laravel-json-api/boolean-softdeletes",
+    "description": "Laravel JSON:API integration for the tenantcloud/laravel-boolean-softdeletes package",
+    "keywords": [
+        "jsonapi.org",
+        "json-api",
+        "jsonapi",
+        "laravel"
+    ],
+    "homepage": "https://github.com/laravel-json-api/boolean-softdeletes",
+    "support": {
+        "issues": "https://github.com/laravel-json-api/boolean-softdeletes/issues"
+    },
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Cloud Creativity Ltd",
+            "email": "info@cloudcreativity.co.uk"
+        },
+        {
+            "name": "Christopher Gammie",
+            "email": "contact@gammie.co.uk"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelJsonApi\\BooleanSoftDeletes\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaravelJsonApi\\BooleanSoftDeletes\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "1.x-dev"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    }
+}
