@@ -36,7 +36,7 @@ class SoftDeleteBooleanDriver extends StandardDriver
      */
     public function __construct($model)
     {
-        if (!in_array(SoftDeletesBoolean::class, class_uses($model), true)) {
+        if (!in_array(SoftDeletesBoolean::class, class_uses_recursive($model), true)) {
             throw new InvalidArgumentException('Expecting a model that is boolean soft-deletable.');
         }
 
