@@ -21,8 +21,8 @@ namespace LaravelJsonApi\BooleanSoftDeletes\Tests\Acceptance;
 
 use App\Schemas\PostSchema;
 use LaravelJsonApi\Contracts\Schema\Container as SchemaContainerContract;
-use LaravelJsonApi\Core\Schema\Container as SchemaContainer;
 use LaravelJsonApi\Contracts\Server\Server;
+use LaravelJsonApi\Core\Schema\Container as SchemaContainer;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
