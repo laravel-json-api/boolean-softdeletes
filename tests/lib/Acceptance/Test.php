@@ -22,7 +22,7 @@ namespace LaravelJsonApi\BooleanSoftDeletes\Tests\Acceptance;
 use App\Models\Post;
 use App\Schemas\PostSchema;
 
-class SoftDeleteTest extends TestCase
+class Test extends TestCase
 {
 
     /**
@@ -124,19 +124,18 @@ class SoftDeleteTest extends TestCase
      */
     public function testItForceDeletesModel($deleted): void
     {
-//        Unlike Eloquent's SoftDeletes trait, there is no `forceDeleted` event on SoftDeletesBoolean
-//        $forceDeleted = false;
-//
-//        Post::forceDeleted(function () use (&$forceDeleted) {
-//            $forceDeleted = true;
-//        });
+        $forceDeleted = false;
+
+        Post::forceDeleted(function () use (&$forceDeleted) {
+            $forceDeleted = true;
+        });
 
         $post = Post::factory()->create(['is_deleted' => $deleted]);
 
         $this->schema->repository()->delete((string) $post->getRouteKey());
 
         $this->assertDeleted($post);
-//        $this->assertTrue($forceDeleted);
+        $this->assertTrue($forceDeleted);
     }
 
     public function testItDoesNotRestoreOnCreate(): void
@@ -506,9 +505,9 @@ class SoftDeleteTest extends TestCase
      */
     private function willNotForceDelete(): self
     {
-//        Post::forceDeleted(function () {
-//            throw new \LogicException('Not expecting a restore event.');
-//        });
+        Post::forceDeleted(function () {
+            throw new \LogicException('Not expecting a restore event.');
+        });
 
         return $this;
     }
