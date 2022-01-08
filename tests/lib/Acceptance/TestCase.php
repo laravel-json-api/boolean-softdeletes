@@ -42,8 +42,14 @@ class TestCase extends BaseTestCase
 
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
+        // @TODO can simplify this when only supporting laravel-json-api/eloquent:^2.0
         $this->app->singleton(SchemaContainerContract::class, static function ($container) {
-            $resolver = new ContainerResolver(static fn() => $container);
+            if (class_exists(ContainerResolver::class)) {
+                $resolver = new ContainerResolver(static fn() => $container);
+            } else {
+                $resolver = $container;
+            }
+
             return new SchemaContainer($resolver, $container->make(Server::class), [
                 PostSchema::class,
             ]);
