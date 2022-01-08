@@ -25,12 +25,12 @@
     "require": {
         "php": "^7.4|^8.0",
         "illuminate/support": "^8.0",
-        "laravel-json-api/eloquent": "^1.0.0",
+        "laravel-json-api/eloquent": "^1.0.1|^2.0",
         "tenantcloud/laravel-boolean-softdeletes": "^3.1"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.17",
-        "phpunit/phpunit": "^9.5"
+        "orchestra/testbench": "^6.23",
+        "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
         "psr-4": {
@@ -49,7 +49,7 @@
             "dev-develop": "1.x-dev"
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
         "sort-packages": true

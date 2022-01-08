@@ -20,13 +20,16 @@ declare(strict_types=1);
 namespace LaravelJsonApi\BooleanSoftDeletes\Tests\Acceptance;
 
 use App\Schemas\PostSchema;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithDeprecationHandling;
 use LaravelJsonApi\Contracts\Schema\Container as SchemaContainerContract;
 use LaravelJsonApi\Contracts\Server\Server;
 use LaravelJsonApi\Core\Schema\Container as SchemaContainer;
+use LaravelJsonApi\Core\Support\ContainerResolver;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
+    use InteractsWithDeprecationHandling;
 
     /**
      * @return void
@@ -35,14 +38,16 @@ class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        $this->withoutDeprecationHandling();
+
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
-        $this->app->singleton(
-            SchemaContainerContract::class,
-            fn($container) => new SchemaContainer($container, $container->make(Server::class), [
+        $this->app->singleton(SchemaContainerContract::class, static function ($container) {
+            $resolver = new ContainerResolver(static fn() => $container);
+            return new SchemaContainer($resolver, $container->make(Server::class), [
                 PostSchema::class,
-            ]),
-        );
+            ]);
+        });
 
         $this->app->singleton(Server::class, function () {
             $server = $this->createMock(Server::class);
