@@ -14,8 +14,11 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: ['7.4', '8.0', '8.1']
-        laravel: ['^8.0']
+        php: [7.4, '8.0', 8.1]
+        laravel: [8.76, 9]
+        exclude:
+          - php: 7.4
+            laravel: 9
 
     steps:
     - name: Checkout Code
@@ -31,7 +34,7 @@ jobs:
         ini-values: error_reporting=E_ALL
 
     - name: Set Laravel Version
-      run: composer require "laravel/framework:${{ matrix.laravel }}" --no-update -n
+      run: composer require "laravel/framework:^${{ matrix.laravel }}" --no-update -n
 
     - name: Install dependencies
       uses: nick-invision/retry@v1

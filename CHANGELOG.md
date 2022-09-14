@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ### Added
 
-- Package now supports PHP 8.1.
+- Package now supports PHP 8.1 and Laravel 9.
 
 ## [1.0.1] - 2021-07-31
 

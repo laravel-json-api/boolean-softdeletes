@@ -134,7 +134,7 @@ class Test extends TestCase
 
         $this->schema->repository()->delete((string) $post->getRouteKey());
 
-        $this->assertDeleted($post);
+        $this->assertModelMissing($post);
         $this->assertTrue($forceDeleted);
     }
 
