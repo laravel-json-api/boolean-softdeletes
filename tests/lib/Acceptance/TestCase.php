@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2021 Cloud Creativity Limited
+ * Copyright 2022 Cloud Creativity Limited
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +20,16 @@ declare(strict_types=1);
 namespace LaravelJsonApi\BooleanSoftDeletes\Tests\Acceptance;
 
 use App\Schemas\PostSchema;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithDeprecationHandling;
 use LaravelJsonApi\Contracts\Schema\Container as SchemaContainerContract;
 use LaravelJsonApi\Contracts\Server\Server;
 use LaravelJsonApi\Core\Schema\Container as SchemaContainer;
+use LaravelJsonApi\Core\Support\ContainerResolver;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
+    use InteractsWithDeprecationHandling;
 
     /**
      * @return void
@@ -35,14 +38,22 @@ class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        $this->withoutDeprecationHandling();
+
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
-        $this->app->singleton(
-            SchemaContainerContract::class,
-            fn($container) => new SchemaContainer($container, $container->make(Server::class), [
+        // @TODO can simplify this when only supporting laravel-json-api/eloquent:^2.0
+        $this->app->singleton(SchemaContainerContract::class, static function ($container) {
+            if (class_exists(ContainerResolver::class)) {
+                $resolver = new ContainerResolver(static fn() => $container);
+            } else {
+                $resolver = $container;
+            }
+
+            return new SchemaContainer($resolver, $container->make(Server::class), [
                 PostSchema::class,
-            ]),
-        );
+            ]);
+        });
 
         $this->app->singleton(Server::class, function () {
             $server = $this->createMock(Server::class);
