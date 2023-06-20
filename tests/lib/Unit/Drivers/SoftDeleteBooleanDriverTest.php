@@ -17,31 +17,27 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace LaravelJsonApi\BooleanSoftDeletes\Tests\Unit\Drivers;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Webkid\LaravelBooleanSoftdeletes\SoftDeletesBoolean;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use LaravelJsonApi\BooleanSoftDeletes\Drivers\SoftDeleteBooleanDriver;
+use PHPUnit\Framework\TestCase;
 
-class Post extends Model
+class SoftDeleteBooleanDriverTest extends TestCase
 {
-
-    use HasFactory;
-    use SoftDeletesBoolean;
-
     /**
-     * @var string[]
+     * @return void
      */
-    protected $fillable = [
-        'content',
-        'slug',
-        'title',
-    ];
+    public function testModelMustHaveBooleanSoftDeletesTrait(): void
+    {
+        $model = new class extends Model {
+            use SoftDeletes;
+        };
 
-    /**
-     * @var string[]
-     */
-    protected $casts = [
-        'is_deleted' => 'boolean',
-    ];
+        $this->expectException(\AssertionError::class);
+        $this->expectExceptionMessage('Expecting a model that is boolean soft-deletable.');
+
+        new SoftDeleteBooleanDriver($model);
+    }
 }

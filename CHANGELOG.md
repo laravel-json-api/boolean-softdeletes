@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. This project adheres to
 [Semantic Versioning](http://semver.org/) and [this changelog format](http://keepachangelog.com/).
 
+## [2.0.0] - 2023-06-20
+
+### Changed
+
+- Upgraded to Laravel 10.
+- Minimum PHP version is now 8.1.
+- Use `assert()` to ensure the soft delete boolean driver receives the correct type of model.
+
 ## [1.1.0] - 2022-09-14
 
 ### Added

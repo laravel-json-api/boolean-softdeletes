@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2022 Cloud Creativity Limited
+ * Copyright 2023 Cloud Creativity Limited
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,24 +21,23 @@ namespace LaravelJsonApi\BooleanSoftDeletes\Drivers;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use InvalidArgumentException;
 use LaravelJsonApi\Eloquent\Drivers\StandardDriver;
 use Webkid\LaravelBooleanSoftdeletes\SoftDeletesBoolean;
 use function boolval;
 
 class SoftDeleteBooleanDriver extends StandardDriver
 {
-
     /**
      * SoftDeleteDriver constructor.
      *
-     * @param Model|SoftDeletesBoolean $model
+     * @param Model&SoftDeletesBoolean $model
      */
     public function __construct($model)
     {
-        if (!in_array(SoftDeletesBoolean::class, class_uses_recursive($model), true)) {
-            throw new InvalidArgumentException('Expecting a model that is boolean soft-deletable.');
-        }
+        assert(
+            in_array(SoftDeletesBoolean::class, class_uses_recursive($model), true),
+            'Expecting a model that is boolean soft-deletable.',
+        );
 
         parent::__construct($model);
     }
@@ -91,7 +90,7 @@ class SoftDeleteBooleanDriver extends StandardDriver
     }
 
     /**
-     * @param Model|SoftDeletesBoolean $model
+     * @param Model&SoftDeletesBoolean $model
      * @return bool
      */
     private function restore(Model $model): bool
@@ -102,7 +101,7 @@ class SoftDeleteBooleanDriver extends StandardDriver
     /**
      * Will the hydration operation restore the model?
      *
-     * @param Model|SoftDeletesBoolean $model
+     * @param Model&SoftDeletesBoolean $model
      * @return bool
      */
     private function willRestore(Model $model): bool
@@ -119,7 +118,7 @@ class SoftDeleteBooleanDriver extends StandardDriver
     /**
      * Will the hydration operation result in the model being soft deleted?
      *
-     * @param Model|SoftDeletesBoolean $model
+     * @param Model&SoftDeletesBoolean $model
      * @return bool
      */
     private function willSoftDelete(Model $model): bool

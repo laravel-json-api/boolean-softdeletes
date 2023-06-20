@@ -14,15 +14,12 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [7.4, '8.0', 8.1]
-        laravel: [8.76, 9]
-        exclude:
-          - php: 7.4
-            laravel: 9
+        php: [8.1, 8.2]
+        laravel: [10]
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -31,13 +28,13 @@ jobs:
         extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd
         tools: composer:v2
         coverage: none
-        ini-values: error_reporting=E_ALL
+        ini-values: error_reporting=E_ALL, zend.assertions=1
 
     - name: Set Laravel Version
       run: composer require "laravel/framework:^${{ matrix.laravel }}" --no-update -n
 
     - name: Install dependencies
-      uses: nick-invision/retry@v1
+      uses: nick-fields/retry@v2
       with:
         timeout_minutes: 5
         max_attempts: 5
