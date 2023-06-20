@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file. This projec
 
 - Upgraded to Laravel 10.
 - Minimum PHP version is now 8.1.
+- Use `assert()` to ensure the soft delete boolean driver receives the correct type of model.
 
 ## [1.1.0] - 2022-09-14
 
