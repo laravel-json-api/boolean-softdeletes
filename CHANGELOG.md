@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file. This projec
 
 ## Unreleased
 
+## [3.0.0] - 2025-03-03
+
 ### Changed
 
 - Minimum PHP is now 8.2.
