@@ -23,14 +23,14 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "illuminate/support": "^10.0",
-        "laravel-json-api/eloquent": "^3.0",
-        "tenantcloud/laravel-boolean-softdeletes": "^5.0"
+        "php": "^8.2",
+        "illuminate/support": "^11.0",
+        "laravel-json-api/eloquent": "^4.0",
+        "tenantcloud/laravel-boolean-softdeletes": "^6.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^8.0",
-        "phpunit/phpunit": "^9.6.9"
+        "orchestra/testbench": "^9.0",
+        "phpunit/phpunit": "^10.5"
     },
     "autoload": {
         "psr-4": {
@@ -46,7 +46,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "2.x-dev"
+            "dev-develop": "3.x-dev"
         }
     },
     "minimum-stability": "stable",
